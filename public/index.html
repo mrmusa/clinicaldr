@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
     <link rel="stylesheet" type="text/css" href="semantic/dist/custom.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" rel="stylesheet">
     <script
     src="https://code.jquery.com/jquery-3.1.1.min.js"
     integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
@@ -14,7 +15,14 @@
     <script src="semantic/dist/semantic.min.js"></script>
 </head>
 <body>
+    
     <div class="container">
+        <header>
+            <div class="logo">
+                <img src="clinical-dr-logo.png" alt="Clinical DR Logo">
+            </div>
+        </header>
+
         <h1 class="ui center aligned header">Upload Phone Numbers...</h1>
         
         <div class="ui two top attached ordered steps">
@@ -34,8 +42,11 @@
             </div>
         </div>
         <div class="ui attached active segment">
-            <h3>Please select a .CSV file of phone numbers to submit...</h3>
+            <h3>Please fill out the form below...</h3>
             <form action="/api/contacts" method="POST" id="csv-form">
+                <div class="ui input">
+                    <input type="text" placeholder="Health Center name..." name="healthCenter">
+                </div><br>
                 <div class="ui input">
                     <!-- <label for="upload">Choose CSV file to upload...</label> -->
                     <input type="file" name="upload" accept=".csv" multiple="false">
