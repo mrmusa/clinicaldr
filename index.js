@@ -84,7 +84,7 @@ ${CtrAddress}
 ${CtrCity}, ${CtrStateAbbr} ${CtrZipCd}${(CtrPhoneNum ? `\n${CtrPhoneNum}` : '') + (UrlTxt ? `\n${UrlTxt}` : '')}`
       );
 
-      const speech = `Here are a few health centers that can help you with ${needs}: ${threeCenters.join('\n')}`;
+      const speech = `Here are a few health centers that can help you with ${needs}:\n${threeCenters.join('\n')}`;
       console.log('healthcenters %s', speech);
 
       res.json({ speech });
