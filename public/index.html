@@ -45,7 +45,7 @@
             <h3>Please fill out the form below...</h3>
             <form action="/api/contacts" method="POST" id="csv-form">
                 <div class="ui input">
-                    <input type="text" placeholder="Health Center name..." name="healthCenter">
+                    <input id="healthCenter" type="text" placeholder="Health Center name..." name="healthCenter">
                 </div><br>
                 <div class="ui input">
                     <!-- <label for="upload">Choose CSV file to upload...</label> -->
@@ -70,7 +70,10 @@
           event.preventDefault();
           $.ajax({
             method: 'POST',
-            url: '/api/contacts'
+            url: '/api/contacts',
+            data: {
+              healthCenter: $('#healthCenter').val().trim()
+            }
           });
 
             var activate = $(this).data('toggle');
