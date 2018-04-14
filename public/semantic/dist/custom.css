@@ -19,6 +19,11 @@ h1.ui.header {
     margin-bottom: 10px;
 }
 
+.ui.input input[type="file"] {
+    background: #f5fcff;
+    width: 80%;
+}
+
 .logo img {
     width: 170px
 }
@@ -28,10 +33,10 @@ h1.ui.header {
     width: 1000px;
 }
 
-@media only screen and (max-width: 480px) {
-    .container {
-        width: 360px;
-    }
+footer {
+    padding-top: 20px;
+    padding-bottom: 10px;
+    text-align: center;
 }
 
 .hide {
@@ -52,7 +57,30 @@ i.icon {
     margin-top: 1em;
 }
 
-#drop_zone {
-    min-height: 500px;
-    border: 3px dotted lightblue;
+@media only screen and (max-width: 480px) {
+    .container {
+        width: 360px;
+    }
+
+    .ui.primary.button {
+        font-size: 1.4em;
+        width: 100%;
+        padding: 20px;
+    }
+
+    .ui.steps .step .title {
+        font-size: 1.6em;
+        padding-bottom: 10px;
+    }
+
+    .ui.steps .step .description {
+        font-size: 1.2em;
+        line-height: 1.4em;
+    }
+
+    .logo img {
+        width: 180px;
+        display: block;
+        margin: 20px auto 0;
+    }
 }
