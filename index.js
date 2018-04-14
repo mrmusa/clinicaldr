@@ -43,8 +43,9 @@ app.post('/api/response', async (req, res, next) => {
   console.log('DIALOGFLOW %j', req.body);
 
   // if intentName is relocation, search api
-  if (req.body.result.metadata.intentName === 'LocationMessage') {
-    const { location, neeeds } = req.body.result.parameters;
+  if (req.body.result.metadata.intentName === 'HealthProblems - yes') {
+    const { parameters = {} } = req.body.result.contexts.find(({ name }) => name === 'geo-city') || {};
+    const { 'geo-city': location, 'neeeds': needs } = parameters;
     // geocode location to lat/long
     rp({
       uri: `https://maps.googleapis.com/maps/api/geocode/json`,
@@ -83,7 +84,7 @@ ${CtrAddress}
 ${CtrCity}, ${CtrStateAbbr} ${CtrZipCd}${(CtrPhoneNum ? `\n${CtrPhoneNum}` : '') + (UrlTxt ? `\n${UrlTxt}` : '')}`
       );
 
-      const speech = `Here are a few health centers that can help you with ${neeeds}: ${threeCenters.join('\n')}`;
+      const speech = `Here are a few health centers that can help you with ${needs}: ${threeCenters.join('\n')}`;
       console.log('healthcenters %s', speech);
 
       res.json({ speech });
