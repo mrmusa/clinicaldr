@@ -7,8 +7,18 @@
     display: none;
 }
 
-.segment {
+i.icon {
+    font-size: 8em;
+    margin: .5em .25rem 0 0;
+    height: inherit;
+}
 
+.ui.segment {
+    padding: 3em;
+}
+
+.ui.primary.button {
+    margin-top: 1em;
 }
 
 #drop_zone {
