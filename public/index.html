@@ -55,10 +55,12 @@
     <script>
 
         $('button').click(function(event){
-            
-            $('#csv-form').on('submit',function(){
-                alert('hello');
-            });
+
+          event.preventDefault();
+          $.ajax({
+            method: 'POST',
+            url: '/api/contacts'
+          });
 
             var activate = $(this).data('toggle');
 
