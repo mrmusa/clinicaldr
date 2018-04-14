@@ -36,7 +36,7 @@ app.get('/healthcheck', (req, res) => {
   })
 });
 
-app.get('/test', sendMessages);
+app.get('/api/test', sendMessages);
 app.post('/api/contacts', sendMessages);
 
 app.post('/api/response', async (req, res, next) => {
