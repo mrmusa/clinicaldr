@@ -1,28 +1,16 @@
 require('dotenv').config({ MULTILINE: true });
 const express = require("express");
 const bodyParser = require("body-parser");
-const cookieParser = require("cookie-parser");
 const rp = require('request-promise');
 const twilio = require('twilio');
 
 const client = new twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 const app = express();
 const PORT = process.env.PORT || 8080;
-
-app.use(cookieParser('gtGroupSecret'));
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.text());
-app.use(bodyParser.json({ type: "application/vnd.api+json" }));
-
-app.get('/healthcheck', (req, res) => {
-  res.json({
-    status: 'healthy'
-  })
-});
-
-app.get('/api/test', (req, res, next) => {
+const contacts = [
+  '+14043123126'
+];
+const sendMessages = (req, res, next) => {
   client.messages.create({
     body:
       `There has been a mandatory evacuation of your area and your health center ${'NAME'}
@@ -35,8 +23,21 @@ Tell us where you will evacuate and we will find a health center to continue you
     console.log('twilio', message.sid, message);
     res.end()
   }).catch(next);
+};
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.text());
+app.use(bodyParser.json({ type: "application/vnd.api+json" }));
+
+app.get('/healthcheck', (req, res) => {
+  res.json({
+    status: 'healthy'
+  })
 });
 
+app.get('/test', sendMessages);
+app.post('/api/contacts', sendMessages);
 
 app.post('/api/response', async (req, res, next) => {
   console.log('DIALOGFLOW %j', req.body);

@@ -6,10 +6,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon index.js",
+    "dev:client": "cd client && yarn start",
+    "dev:server": "nodemon index.js",
+    "dev": "npm-run-all --parallel dev:server dev:client",
     "start": "node index.js",
     "client": "cd client && yarn start",
-    "postinstall": "(cd client && yarn install && yarn run build)"
+    "postinstall": "cd client && yarn install && yarn run build"
   },
   "repository": {
     "type": "git",
@@ -26,6 +28,7 @@
     "cookie-parser": "^1.4.3",
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
+    "npm-run-all": "^4.1.2",
     "request-promise": "^4.2.2",
     "twilio": "^3.15.0"
   },
