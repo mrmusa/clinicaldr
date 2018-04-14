@@ -78,8 +78,8 @@ app.post('/api/response', async (req, res, next) => {
   }
 });
 
-app.use(express.static('./client/build'));
-app.get('/*', (req, res) => {
+app.use('/home', express.static('./client/build'));
+app.get('/home/*', (req, res) => {
   res.sendFile(
     path.join(
       __dirname,
