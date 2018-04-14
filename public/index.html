@@ -85,7 +85,7 @@
         });
         
         $('input:file').change(function(){
-            let uploadItem = $('#csv-form input').get(0).files.length;
+            let uploadItem = $('#csv-form input').val();
 
             if(uploadItem === 0){
                 console.log('no items selected');
