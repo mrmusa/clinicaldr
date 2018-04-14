@@ -11,11 +11,10 @@ const contacts = [
   '+14043123126'
 ];
 const sendMessages = (req, res, next) => {
+  const healthCenter = req.query.healthCenter || req.body.healthCenter;
   client.messages.create({
     body:
-      `There has been a mandatory evacuation of your area and your health center ${'NAME'}
-    
-Tell us where you will evacuate and we will find a health center to continue your care
+      `There has been a mandatory evacuation of your area and your health center ${healthCenter}.\n\nTell us where you will evacuate to and we will find a health center to continue your care.
 `,
     to: process.env.SAMPLE_MANAGER_NUMBER,
     from: process.env.TWILIO_NUMBER
