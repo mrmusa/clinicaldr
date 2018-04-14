@@ -42,7 +42,7 @@
         </div>
         <div class="ui attached active segment">
             <p>This is the first step</p>
-            <form action="" id="csv-form">
+            <form action="/api/contacts" id="csv-form">
                 <div class="ui input">
                     <!-- <label for="upload">Choose CSV file to upload...</label> -->
                     <input type="file" name="upload" accept=".csv" multiple="false">
@@ -77,6 +77,10 @@
         $('.segment button').click(function(event){
             event.preventDefault();
             var activate = $(this).data('toggle');
+
+            if($(this).hasClass('csv-submit')){
+                $('form').submit();
+            }
             $('.steps .active').toggleClass('active disabled');
             
             $('.steps .'+activate).toggleClass('disabled active');
