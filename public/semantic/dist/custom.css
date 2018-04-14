@@ -1,5 +1,30 @@
+body {
+    color: #777;
+}
+
+h1.ui.header {
+    font-family: 'Roboto Slab', serif;
+    color: #eb1923;
+}
+
+.ui.steps .step.active .title {
+    color: #00aeee;
+}
+
+.ui.ordered.steps .step.active:before, .ui.steps .active.step .icon {
+    color: #777;
+}
+
+.ui.input {
+    margin-bottom: 10px;
+}
+
+.logo img {
+    width: 170px
+}
+
 .container {
-    margin: 50px auto;
+    margin:0 auto;
     width: 1000px;
 }
 
