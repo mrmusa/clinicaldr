@@ -43,8 +43,8 @@ app.post('/api/response', async (req, res, next) => {
   console.log('DIALOGFLOW %j', req.body);
 
   // if intentName is relocation, search api
-  if (req.body.result.metadata.intentName === 'relocation') {
-    const { location, needs } = req.body.result.parameters;
+  if (req.body.result.metadata.intentName === 'LocationMessage') {
+    const { location, neeeds } = req.body.result.parameters;
     // geocode location to lat/long
     rp({
       uri: `https://maps.googleapis.com/maps/api/geocode/json`,
@@ -67,15 +67,37 @@ app.post('/api/response', async (req, res, next) => {
       });
     }).then((healthCenters = []) => {
       // list 3, pick 1
-      res.json({
-        speech: `The ${'NAME'}, a FQHC has been notified of your needs and will confirm your appt. Center hours and contact if you don't hear back immediately.`
-      });
+      const threeCenters = healthCenters.slice(0, 3).map((
+        { CtrNm,
+          CtrAddress,
+          CtrCity,
+          CtrStateAbbr,
+          CtrZipCd,
+          CtrPhoneNum,
+          ParentCtrNm,
+          UrlTxt,
+        }, index) =>
+`
+${index+1}. ${CtrNm}
+${CtrAddress}
+${CtrCity}, ${CtrStateAbbr} ${CtrZipCd}${(CtrPhoneNum ? `\n${CtrPhoneNum}` : '') + (UrlTxt ? `\n${UrlTxt}` : '')}`
+      );
+
+      const speech = `Here are a few health centers that can help you with ${neeeds}: ${threeCenters.join('\n')}`;
+      console.log('healthcenters %s', speech);
+
+      res.json({ speech });
     }).catch(err => {
+      console.log(err);
       res.json({
         speech: `There was an error. Contact our service phone ${'NUMBER'}`
       })
     });
 
+  } else {
+    res.json({
+      speech: `The ${'__HEALTH_CENTER__'} has been notified of your needs and will confirm your appt. Center hours and contact if you don't hear back immediately.`
+    })
   }
 });
 
